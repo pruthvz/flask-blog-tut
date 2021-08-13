@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}homepage title {% endblock %} {%
+block content %} {% with messages = get_flashed_messages(with_categories=true)
+%} {% if messages %} {% for category, message in messages %}
+<div class="alert alert-{{category}}" role="alert">{{message}}</div>
+
+{% endfor %} {% endif %} {% endwith %}
+<!-- <a href="/create-post" class="btn btn-danger rounded-pill">create a post</a> -->
+
+<h1 class="display-3 text-center pt-4" style="font-weight: 400">Blog posts</h1>
+<!-- BLOG TEMPLATES -->
+<div class="container">
+  {% for post in posts %}
+  <div class="col-md-12" data-aos="fade-up">
+    <h1>{{post.title}}</h1>
+    <p>{{post.text}}</p>
+    <div>
+      <span class="badge bg-success">Author: {{post.user.username}}</span>
+      <span class="badge bg-dark">Posted {{post.date_created}}</span>
+      <span class="badge bg-danger"
+        ><a href="#"><i class="fas fa-trash"></i></a
+      ></span>
+    </div>
+    <hr />
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
