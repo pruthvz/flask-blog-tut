@@ -1,2 +1,5 @@
-{% extends "base.html" %} {% block title %}homepage title {% endblock %} {%
-block content %} {% endblock %}
+{% extends "posts_div.html" %} {% block title %}{{username}}'s posts' {%
+endblock %} {% block header %}
+<h3 class="title text-center">{{username}}'s Posts</h3>
+
+{% endblock %}

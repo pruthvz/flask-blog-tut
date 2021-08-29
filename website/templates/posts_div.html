@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block content
+%} {% with messages = get_flashed_messages(with_categories=true) %} {% if
+messages %} {% for category, message in messages %}
+<div class="alert alert-{{category}}" role="alert">{{message}}</div>
+
+{% endfor %} {% endif %} {% endwith %}
+<!-- <a href="/create-post" class="btn btn-danger rounded-pill">create a post</a> -->
+
+<h1 class="display-3 text-center pt-4" style="font-weight: 400">
+  {% block header %}Blog posts{% endblock %}
+</h1>
+<!-- BLOG TEMPLATES -->
+<div class="container">
+  {% for post in posts %}
+  <div class="col-md-12" data-aos="fade-up">
+    <h1>{{post.title}}</h1>
+    <p>{{post.text}}</p>
+    <div>
+      <span class="badge bg-success"
+        >Author:
+        <a
+          class="text-white text-decoration-none"
+          href="/posts/{{post.user.username}}"
+          >{{post.user.username}}</a
+        ></span
+      >
+      <span class="badge bg-dark">Posted {{post.date_created}}</span>
+      {% if user.id == post.author %}
+      <div class="btn-group">
+        <button
+          class="btn btn-secondary btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Small button
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-dark"
+          aria-labelledby="navbarDarkDropdownMenuLink"
+        >
+          <li>
+            <a class="dropdown-item" href="/delete-post/{{post.id}}">Delete</a>
+          </li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <hr />
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

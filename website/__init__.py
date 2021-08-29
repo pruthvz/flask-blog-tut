@@ -15,7 +15,8 @@ def create_app():
 
     @app.route("/")
     def home():
-        return render_template('home.html', user=current_user)
+        posts = Post.query.all()
+        return render_template('home.html', user=current_user, posts=posts)
 
     # importing different python files
     from .views import views
